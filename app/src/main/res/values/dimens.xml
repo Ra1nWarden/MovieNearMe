@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="action_button_size">24dp</dimen>
+    <dimen name="drawer_width">240dp</dimen>
+    <dimen name="drawer_item_height">60dp</dimen>
+    <dimen name="section_field_width">160dp</dimen>
+    <dimen name="short_section_field_width">90dp</dimen>
+    <dimen name="section_field_horizontal_padding">10dp</dimen>
+    <dimen name="section_field_vertical_padding">10dp</dimen>
+    <dimen name="list_item_height">60dp</dimen>
+    <dimen name="list_item_padding">20dp</dimen>
+</resources>

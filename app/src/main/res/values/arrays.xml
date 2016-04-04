@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="navigation_items">
+        <item>查看电影</item>
+        <item>我的订单</item>
+        <item>登出</item>
+    </string-array>
+</resources>
