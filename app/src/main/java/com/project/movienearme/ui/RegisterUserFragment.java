@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.project.movienearme.R;
+import com.project.movienearme.activities.HomeActivity;
 import com.project.movienearme.data.UserManager;
 
 /**
@@ -64,6 +65,7 @@ public final class RegisterUserFragment extends DialogFragment {
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .remove(RegisterUserFragment.this)
                                     .commit();
+                            ((HomeActivity) getActivity()).checkAdmin();
                         } else {
                             toast(getActivity(), R.string.unknown_eror);
                         }

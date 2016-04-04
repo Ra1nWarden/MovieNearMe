@@ -14,6 +14,7 @@ public final class UserManager {
     private DatabaseOpenHelper databaseOpenHelper;
     private SharedPreferences preferences;
     private static final String USERNAME_KEY = "userId";
+    private static final String ADMIN_KEY = "admin";
     private static final String NO_LOGGED_IN_USER = "";
 
     public UserManager(Context context) {
@@ -25,6 +26,10 @@ public final class UserManager {
         return preferences.getString(USERNAME_KEY, NO_LOGGED_IN_USER);
     }
 
+    public boolean getLoggedInUserAdmin() {
+        return preferences.getBoolean(ADMIN_KEY, false);
+    }
+
     public boolean userLoggedIn() {
         return !preferences.getString(USERNAME_KEY, NO_LOGGED_IN_USER).equals(NO_LOGGED_IN_USER);
     }
@@ -34,8 +39,10 @@ public final class UserManager {
                 "* from users where username = ? and password = ?", new String[]{username,
                 password});
         if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(USERNAME_KEY, username);
+            editor.putBoolean(ADMIN_KEY, cursor.getInt(cursor.getColumnIndex("admin")) == 1);
             editor.commit();
             return true;
         }

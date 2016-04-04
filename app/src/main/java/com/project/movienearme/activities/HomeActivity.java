@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.project.movienearme.R;
@@ -21,6 +22,7 @@ public final class HomeActivity extends AppCompatActivity {
     private ListView navigationList;
     private DrawerLayout drawer;
     private UserManager userManager;
+    private ImageButton addButton;
 
     @Override
     public void onCreate(Bundle savedInstance) {
@@ -41,6 +43,7 @@ public final class HomeActivity extends AppCompatActivity {
             UserLoginFragment fragment = new UserLoginFragment();
             fragment.show(getSupportFragmentManager(), UserLoginFragment.TAG);
         }
+        checkAdmin();
     }
 
     private void setUpActionBar() {
@@ -51,6 +54,17 @@ public final class HomeActivity extends AppCompatActivity {
         View actionBarView = inflater.inflate(R.layout.action_bar, null);
         actionBar.setCustomView(actionBarView);
         actionBar.setDisplayShowCustomEnabled(true);
+        addButton = (ImageButton) actionBarView.findViewById(R.id.add_button);
+    }
+
+    public void checkAdmin() {
+        if (userManager.getLoggedInUserAdmin()) {
+            addButton.setVisibility(View.VISIBLE);
+            addButton.setEnabled(false);
+        } else {
+            addButton.setVisibility(View.INVISIBLE);
+            addButton.setEnabled(true);
+        }
     }
 
     public void toggleDrawer(View v) {
