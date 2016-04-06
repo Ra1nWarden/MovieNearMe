@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/short_box_height"
+        android:gravity="center"/>
+
+    <TextView
+        android:id="@+id/content_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tall_box_height"
+        android:gravity="center"/>
+
+    <fragment
+        android:name="com.project.movienearme.ui.CinemaListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="cinema_list"/>
+
+</LinearLayout>

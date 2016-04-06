@@ -65,7 +65,7 @@ public final class RegisterUserFragment extends DialogFragment {
                             getActivity().getSupportFragmentManager().beginTransaction()
                                     .remove(RegisterUserFragment.this)
                                     .commit();
-                            ((HomeActivity) getActivity()).checkAdmin();
+                            ((HomeActivity) getActivity()).showAddButton();
                         } else {
                             toast(getActivity(), R.string.unknown_eror);
                         }

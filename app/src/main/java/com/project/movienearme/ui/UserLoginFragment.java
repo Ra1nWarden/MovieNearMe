@@ -43,7 +43,7 @@ public final class UserLoginFragment extends DialogFragment {
                                     .beginTransaction()
                                     .remove(UserLoginFragment.this)
                                     .commit();
-                            ((HomeActivity) getActivity()).checkAdmin();
+                            ((HomeActivity) getActivity()).showAddButton();
                         } else {
                             toast(getActivity(), R.string.login_failure);
                             passwordField.setText("");

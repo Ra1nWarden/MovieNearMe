@@ -4,7 +4,9 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 /**
  * A class for managing user.
@@ -16,6 +18,7 @@ public final class UserManager {
     private static final String USERNAME_KEY = "userId";
     private static final String ADMIN_KEY = "admin";
     private static final String NO_LOGGED_IN_USER = "";
+    private static final String TAG = "UserManager";
 
     public UserManager(Context context) {
         this.databaseOpenHelper = new DatabaseOpenHelper(context);
@@ -56,5 +59,30 @@ public final class UserManager {
         contentValues.put("real_name", realName);
         contentValues.put("phone_number", phoneNumber);
         databaseOpenHelper.getWritableDatabase().insert("users", null, contentValues);
+    }
+
+    public void logout() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(USERNAME_KEY, NO_LOGGED_IN_USER)
+                .commit();
+    }
+
+    public String getLoggedInUserField(String fieldName) {
+        return getUserFieldForUsername(fieldName, getLoggedInUsername());
+    }
+
+    public String getUserFieldForUsername(String fieldName, String username) {
+        SQLiteDatabase database = databaseOpenHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("select * from users where username = ?", new
+                String[]{username});
+        if (cursor.getCount() > 0) {
+            cursor.moveToFirst();
+            return cursor.getString(cursor.getColumnIndex(fieldName));
+        } else {
+            if (Log.isLoggable(TAG, Log.ERROR)) {
+                Log.e(TAG, "No item found in database.");
+            }
+            return null;
+        }
     }
 }

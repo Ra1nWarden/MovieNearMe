@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/short_box_height"
+        android:gravity="center"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/content_box"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/tall_box_height"
+        android:gravity="center"
+        android:textColor="@android:color/darker_gray"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_height">
+
+
+        <TextView
+            android:id="@+id/cinema_name_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="@dimen/list_item_padding"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/cinema_address_field"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="@dimen/list_item_padding"
+            android:textColor="@android:color/darker_gray"/>
+
+    </RelativeLayout>
+
+    <fragment
+        android:name="com.project.movienearme.ui.TimeListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:tag="time_list"/>
+
+</LinearLayout>

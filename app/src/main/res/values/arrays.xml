@@ -6,4 +6,9 @@
         <item>我的资料</item>
         <item>登出</item>
     </string-array>
+    <string-array name="personal_profile_items">
+        <item>用户名</item>
+        <item>真实姓名</item>
+        <item>联系电话</item>
+    </string-array>
 </resources>
