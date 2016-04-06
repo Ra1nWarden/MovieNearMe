@@ -65,7 +65,7 @@ public final class MovieManager {
         return cursor.getString(cursor.getColumnIndex("cinema_address"));
     }
 
-    public int countMissingSeatForId(int listingId) {
+    public int getTotalSeatForCinema(int listingId) {
         Cursor cursor = database.getReadableDatabase().rawQuery("select * from listings where _id" +
                 " = ?", new String[]{Integer.toString(listingId)});
         cursor.moveToFirst();
@@ -74,9 +74,12 @@ public final class MovieManager {
         cursor = database.getReadableDatabase().rawQuery("select * from cinema where " +
                 "cinema_id = ?", new String[]{Integer.toString(cinemaId)});
         cursor.moveToFirst();
-        int total = cursor.getInt(cursor.getColumnIndex("total_seats"));
-        cursor.close();
-        cursor = database.getReadableDatabase().rawQuery("select count(*) as total from " +
+        return cursor.getInt(cursor.getColumnIndex("total_seats"));
+    }
+
+    public int countMissingSeatForId(int listingId) {
+        int total = getTotalSeatForCinema(listingId);
+        Cursor cursor = database.getReadableDatabase().rawQuery("select count(*) as total from " +
                 "orders where listing_id = ?", new String[]{Integer.toString(listingId)});
         cursor.moveToFirst();
         int ordered = cursor.getInt(cursor.getColumnIndex("total"));
@@ -87,5 +90,26 @@ public final class MovieManager {
         return database.getReadableDatabase().rawQuery("select * from listings where cinema_id" +
                 " = ? and movie_id = ?", new String[]{Integer.toString(cinemaId), Integer
                 .toString(movieId)});
+    }
+
+    public int getCinemaIdForListing(int listingId) {
+        Cursor cursor = database.getReadableDatabase().rawQuery("select * from listings where _id" +
+                " = ?", new String[]{Integer.toString(listingId)});
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex("cinema_id"));
+    }
+
+    public int getMovieIdForListing(int listingId) {
+        Cursor cursor = database.getReadableDatabase().rawQuery("select * from listings where _id" +
+                " = ?", new String[]{Integer.toString(listingId)});
+        cursor.moveToFirst();
+        return cursor.getInt(cursor.getColumnIndex("movie_id"));
+    }
+
+    public boolean isSeatAvailableForId(int listingId, int position) {
+        Cursor cursor = database.getReadableDatabase().rawQuery("select * from orders where " +
+                "listing_id = ? and seat_id = ?", new String[]{Integer.toString(listingId), Integer
+                .toString(position)});
+        return cursor.getCount() == 0;
     }
 }
