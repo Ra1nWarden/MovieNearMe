@@ -1,7 +1,12 @@
 package com.project.movienearme.data;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class for managing movies.
@@ -111,5 +116,42 @@ public final class MovieManager {
                 "listing_id = ? and seat_id = ?", new String[]{Integer.toString(listingId), Integer
                 .toString(position)});
         return cursor.getCount() == 0;
+    }
+
+    public boolean reserveTicketsForListing(String loggedInUsername, List<Integer> selected, int
+            listId) {
+        SQLiteDatabase insertDatabase = database.getWritableDatabase();
+        for (int each : selected) {
+            ContentValues values = new ContentValues();
+            values.put("username", loggedInUsername);
+            values.put("listing_id", listId);
+            values.put("seat_id", each);
+            long id = insertDatabase.insert("orders", null, values);
+            if (id == -1) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Cursor getOrdersForUsername(String username) {
+        return database.getReadableDatabase().rawQuery("select distinct listing_id as _id, " +
+                "movie_id, cinema_id, show_time from orders join listings on orders.listing_id = " +
+                "listings._id where username = ?", new String[]{username});
+    }
+
+    public List<Integer> getSeatsForUsernameAndListingId(String username, int listingId) {
+        List<Integer> ret = new ArrayList<>();
+        Cursor cursor = database.getReadableDatabase().rawQuery("select * from orders where " +
+                "username = ? and listing_id = ?", new String[]{username, Integer.toString
+                (listingId)});
+        if (cursor.moveToFirst()) {
+            while (!cursor.isAfterLast()) {
+                ret.add(cursor.getInt(cursor.getColumnIndex("seat_id")));
+                cursor.moveToNext();
+            }
+
+        }
+        return ret;
     }
 }

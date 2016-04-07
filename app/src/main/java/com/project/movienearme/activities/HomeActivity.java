@@ -22,9 +22,11 @@ import com.project.movienearme.R;
 import com.project.movienearme.data.MovieListAdapter;
 import com.project.movienearme.data.MovieManager;
 import com.project.movienearme.data.NavigationListAdapter;
+import com.project.movienearme.data.OrderListAdapter;
 import com.project.movienearme.data.ProfileListAdapter;
 import com.project.movienearme.data.UserManager;
 import com.project.movienearme.ui.MovieListFragment;
+import com.project.movienearme.ui.OrderListFragment;
 import com.project.movienearme.ui.UserLoginFragment;
 
 /**
@@ -157,6 +159,15 @@ public final class HomeActivity extends AppCompatActivity implements AdapterView
         } else if (position == 0) {
             goToHomeView();
         } else if (position == 1) {
+            MovieManager manager = new MovieManager(this);
+            OrderListFragment orderList = new OrderListFragment();
+            OrderListAdapter listAdapter = new OrderListAdapter(this, manager.getOrdersForUsername
+                    (userManager.getLoggedInUsername()));
+            orderList.setListAdapter(listAdapter);
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.content_frame, orderList)
+                    .commit();
+            titleView.setText((String) adapter.getItem(position));
             addButton.setVisibility(View.INVISIBLE);
             addButton.setEnabled(false);
         }

@@ -1,6 +1,7 @@
 package com.project.movienearme.ui;
 
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -14,6 +15,7 @@ public final class SeatSelectionListFragment extends ListFragment {
     @Override
     public void onListItemClick(ListView l, View view, int position, long id) {
         super.onListItemClick(l, view, position, id);
+        Log.d("SeatSelection", "item clicked " + position);
         SeatListAdapter adapter = (SeatListAdapter) getListAdapter();
         adapter.toggle(position);
     }

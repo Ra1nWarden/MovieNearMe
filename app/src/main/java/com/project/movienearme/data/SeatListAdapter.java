@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.project.movienearme.R;
@@ -62,22 +63,39 @@ public final class SeatListAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context
                     .LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.selection_list_item, parent, false);
-            SeatListAdapter.ViewHolder viewHolder = new SeatListAdapter.ViewHolder();
+            final SeatListAdapter.ViewHolder viewHolder = new SeatListAdapter.ViewHolder();
             viewHolder.idView = (TextView) v.findViewById(R.id.item_title);
             viewHolder.checkBox = (CheckBox) v.findViewById(R.id.selection_box);
+            viewHolder.checkBox.setOnCheckedChangeListener(new CompoundButton
+                    .OnCheckedChangeListener() {
+
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    Seat seat = (Seat) viewHolder.checkBox.getTag();
+                    seat.available = !isChecked;
+                }
+            });
             v.setTag(viewHolder);
+            viewHolder.checkBox.setTag(getItem(position));
+        } else {
+            ((ViewHolder) v.getTag()).checkBox.setTag(getItem(position));
         }
         Seat seat = (Seat) getItem(position);
         SeatListAdapter.ViewHolder viewHolder = (SeatListAdapter.ViewHolder) v.getTag();
         viewHolder.idView.setText(Integer.toString(seat.seatId));
         viewHolder.checkBox.setChecked(!seat.available);
+        viewHolder.checkBox.setEnabled(seat.enabled);
         return v;
     }
 
-    @Override
-    public boolean isEnabled(int position) {
-        Seat seat = seats.get(position);
-        return seat.enabled;
+    public List<Integer> getSelectedSeats() {
+        List<Integer> selected = new ArrayList<>();
+        for (Seat seat : seats) {
+            if (seat.enabled && !seat.available) {
+                selected.add(seat.seatId);
+            }
+        }
+        return selected;
     }
 
     public static class ViewHolder {
