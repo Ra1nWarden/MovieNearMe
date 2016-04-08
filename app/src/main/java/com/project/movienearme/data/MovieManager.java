@@ -13,7 +13,6 @@ import java.util.List;
  */
 public final class MovieManager {
 
-    private static final String TAG = "MovieManager";
     private DatabaseOpenHelper database;
 
     public MovieManager(Context context) {
@@ -140,6 +139,11 @@ public final class MovieManager {
                 "listings._id where username = ?", new String[]{username});
     }
 
+    public Cursor getAllCinema() {
+        return database.getReadableDatabase().rawQuery("select cinema_id as _id, cinema_name from" +
+                " cinema", new String[]{});
+    }
+
     public List<Integer> getSeatsForUsernameAndListingId(String username, int listingId) {
         List<Integer> ret = new ArrayList<>();
         Cursor cursor = database.getReadableDatabase().rawQuery("select * from orders where " +
@@ -153,5 +157,29 @@ public final class MovieManager {
 
         }
         return ret;
+    }
+
+    public boolean addMovieWithSections(String movieName, String movieDescription, String movieCast,
+                                        List<SectionListAdapter.Section> inputSections) {
+        ContentValues movie = new ContentValues();
+        movie.put("movie_name", movieName);
+        movie.put("movie_description", movieDescription);
+        movie.put("cast", movieCast);
+        long movieId = database.getWritableDatabase().insert("movies", null, movie);
+        if (movieId == -1) {
+            return false;
+        }
+        for (SectionListAdapter.Section each : inputSections) {
+            ContentValues listing = new ContentValues();
+            listing.put("cinema_id", each.cinemaId);
+            listing.put("show_time", each.showTime);
+            listing.put("movie_id", movieId);
+            long listingId = database.getWritableDatabase().insert("listings", null, listing);
+            if (listingId == -1) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

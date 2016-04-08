@@ -67,7 +67,7 @@ public final class RegisterUserFragment extends DialogFragment {
                                     .commit();
                             ((HomeActivity) getActivity()).showAddButton();
                         } else {
-                            toast(getActivity(), R.string.unknown_eror);
+                            toast(getActivity(), R.string.unknown_error);
                         }
                     }
                 })

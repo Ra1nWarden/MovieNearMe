@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/movie_name_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_name_title"/>
+
+        <EditText
+            android:id="@+id/movie_name_field"
+            android:layout_width="@dimen/section_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:paddingLeft="@dimen/section_field_horizontal_padding"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/movie_description_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_description_title"/>
+
+        <EditText
+            android:id="@+id/movie_description_field"
+            android:layout_width="@dimen/section_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:paddingLeft="@dimen/section_field_horizontal_padding"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/movie_cast_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/movie_cast_title"/>
+
+        <EditText
+            android:id="@+id/movie_cast_field"
+            android:layout_width="@dimen/section_field_width"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:paddingLeft="@dimen/section_field_horizontal_padding"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/add_section_link"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/list_item_height"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:text="@string/add_section"
+        android:textColor="@color/colorPrimary"/>
+
+    <ListView
+        android:id="@+id/section_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </ListView>
+
+</LinearLayout>
