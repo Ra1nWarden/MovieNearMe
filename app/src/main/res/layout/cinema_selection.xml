@@ -8,12 +8,15 @@
         android:id="@+id/title_box"
         android:layout_width="match_parent"
         android:layout_height="@dimen/short_box_height"
+        android:textColor="@android:color/black"
         android:gravity="center"/>
 
     <TextView
         android:id="@+id/content_box"
         android:layout_width="match_parent"
         android:layout_height="@dimen/tall_box_height"
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/white"
         android:gravity="center"/>
 
     <fragment

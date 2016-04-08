@@ -16,12 +16,14 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/tall_box_height"
         android:gravity="center"
-        android:textColor="@android:color/darker_gray"/>
+        android:background="@android:color/darker_gray"
+        android:textColor="@android:color/white"/>
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="@dimen/list_item_height">
+        android:layout_height="@dimen/list_item_height"
+        android:background="@android:color/holo_green_dark">
 
 
         <TextView
@@ -31,7 +33,7 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:paddingLeft="@dimen/list_item_padding"
-            android:textColor="@android:color/black"/>
+            android:textColor="@android:color/white"/>
 
         <TextView
             android:id="@+id/cinema_address_field"
@@ -40,7 +42,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:paddingRight="@dimen/list_item_padding"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/white"/>
 
     </RelativeLayout>
 
