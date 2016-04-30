@@ -22,7 +22,7 @@ import com.project.movienearme.ui.EditSectionFragment;
 import java.util.List;
 
 /**
- * An activity for adding movies.
+ * An activity for adding movies. (Admin only)
  */
 public final class AddMovieActivity extends AppCompatActivity implements EditSectionFragment
         .OnSectionDetailsChangedListener {

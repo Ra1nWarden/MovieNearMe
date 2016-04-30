@@ -15,7 +15,7 @@ import com.project.movienearme.data.MovieManager;
 import com.project.movienearme.ui.CinemaListFragment;
 
 /**
- * An activity that displays details of a movie.
+ * An activity that displays details of a movie by listing showing cinema.
  */
 public final class MovieDetailsCinemaActivity extends AppCompatActivity {
 

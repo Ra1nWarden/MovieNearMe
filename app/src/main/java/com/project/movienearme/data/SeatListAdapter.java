@@ -82,7 +82,7 @@ public final class SeatListAdapter extends BaseAdapter {
         }
         Seat seat = (Seat) getItem(position);
         SeatListAdapter.ViewHolder viewHolder = (SeatListAdapter.ViewHolder) v.getTag();
-        viewHolder.idView.setText(Integer.toString(seat.seatId));
+        viewHolder.idView.setText(String.format("%d排%d号", seat.seatId / 10 + 1, seat.seatId % 10 + 1));
         viewHolder.checkBox.setChecked(!seat.available);
         viewHolder.checkBox.setEnabled(seat.enabled);
         return v;

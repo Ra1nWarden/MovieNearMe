@@ -43,7 +43,7 @@ public final class OrderListFragment extends ListFragment {
         TextView seatField = (TextView) forms.findViewById(R.id.seat_value);
         StringBuilder seatString = new StringBuilder();
         UserManager userManager = new UserManager(getActivity());
-        List<Integer> seats = manager.getSeatsForUsernameAndListingId(userManager
+        List<String> seats = manager.getSeatsForUsernameAndListingId(userManager
                 .getLoggedInUsername(), listingId);
         seatField.setText(TextUtils.join(",", seats));
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())

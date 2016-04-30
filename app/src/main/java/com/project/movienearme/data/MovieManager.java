@@ -144,14 +144,15 @@ public final class MovieManager {
                 " cinema", new String[]{});
     }
 
-    public List<Integer> getSeatsForUsernameAndListingId(String username, int listingId) {
-        List<Integer> ret = new ArrayList<>();
+    public List<String> getSeatsForUsernameAndListingId(String username, int listingId) {
+        List<String> ret = new ArrayList<>();
         Cursor cursor = database.getReadableDatabase().rawQuery("select * from orders where " +
                 "username = ? and listing_id = ?", new String[]{username, Integer.toString
                 (listingId)});
         if (cursor.moveToFirst()) {
             while (!cursor.isAfterLast()) {
-                ret.add(cursor.getInt(cursor.getColumnIndex("seat_id")));
+                int seatId = cursor.getInt(cursor.getColumnIndex("seat_id"));
+                ret.add(String.format("%d排%d号", seatId / 10 + 1, seatId % 10 + 1));
                 cursor.moveToNext();
             }
 
